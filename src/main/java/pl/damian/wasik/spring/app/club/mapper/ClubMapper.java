@@ -18,4 +18,16 @@ public class ClubMapper {
                 .build();
         return club;
     }
+
+    public ClubEntity mapToClubEntity(Club club) {
+        ClubEntity clubEntity = ClubEntity.builder()
+                .id(club.getId())
+                .title(club.getTitle())
+                .photoUrl(club.getPhotoUrl())
+                .content(club.getContent())
+                .createdOn(club.getCreatedOn())
+                .updatedOn(club.getUpdatedOn())
+                .build();
+        return clubEntity;
+    }
 }

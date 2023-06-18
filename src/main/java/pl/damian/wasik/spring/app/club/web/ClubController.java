@@ -3,7 +3,11 @@ package pl.damian.wasik.spring.app.club.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.damian.wasik.spring.app.club.repository.entity.ClubEntity;
 import pl.damian.wasik.spring.app.club.service.ClubService;
 import pl.damian.wasik.spring.app.club.web.model.Club;
 
@@ -23,5 +27,32 @@ public class ClubController {
         List<Club> clubs = clubService.findAllClubs();
         model.addAttribute("clubs", clubs);
         return "clubs-list";
+    }
+
+    @GetMapping("/new")
+    public String createView(Model model) {
+        ClubEntity club = new ClubEntity();
+        model.addAttribute("club", club);
+        return "clubs-create";
+    }
+
+    @PostMapping("/new")
+    public String create(@ModelAttribute("club") ClubEntity club) {
+        clubService.create(club);
+        return "redirect:/clubs";
+    }
+
+    @GetMapping("/{id}/update")
+    public String updateView(@PathVariable("id") Long id, Model model) {
+        Club club = clubService.findById(id);
+        model.addAttribute("club", club);
+        return "clubs-edit";
+    }
+
+    @PostMapping("/{id}/update")
+    public String update(@PathVariable("id") Long id, @ModelAttribute("club") Club club) {
+        club.setId(id);
+        clubService.update(club);
+        return "redirect:/clubs";
     }
 }
