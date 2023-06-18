@@ -26,4 +26,21 @@ public class ClubServiceImpl implements ClubService {
         List<ClubEntity> clubs = clubRepository.findAll();
         return clubs.stream().map(clubMapper::mapToClub).collect(Collectors.toList());
     }
+
+    @Override
+    public ClubEntity create(ClubEntity club) {
+        return clubRepository.save(club);
+    }
+
+    @Override
+    public Club findById(Long id) {
+        ClubEntity clubEntity = clubRepository.findById(id).get();
+        return clubMapper.mapToClub(clubEntity);
+    }
+
+    @Override
+    public void update(Club club) {
+        ClubEntity clubEntity = clubMapper.mapToClubEntity(club);
+        clubRepository.save(clubEntity);
+    }
 }
