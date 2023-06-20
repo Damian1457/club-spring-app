@@ -28,8 +28,9 @@ public class ClubServiceImpl implements ClubService {
     }
 
     @Override
-    public ClubEntity create(ClubEntity club) {
-        return clubRepository.save(club);
+    public ClubEntity create(Club club) {
+        ClubEntity clubEntity = clubMapper.mapToClubEntity(club);
+        return clubRepository.save(clubEntity);
     }
 
     @Override
