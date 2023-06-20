@@ -1,7 +1,9 @@
 package pl.damian.wasik.spring.app.club.web;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,7 +39,13 @@ public class ClubController {
     }
 
     @PostMapping("/new")
-    public String create(@ModelAttribute("club") ClubEntity club) {
+    public String create(@Valid @ModelAttribute("club") Club club,
+                         BindingResult bindingResult,
+                         Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("club", club);
+            return "clubs-create";
+        }
         clubService.create(club);
         return "redirect:/clubs";
     }
@@ -50,7 +58,12 @@ public class ClubController {
     }
 
     @PostMapping("/{id}/update")
-    public String update(@PathVariable("id") Long id, @ModelAttribute("club") Club club) {
+    public String update(@PathVariable("id") Long id,
+                         @Valid @ModelAttribute("club") Club club,
+                         BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "clubs-edit";
+        }
         club.setId(id);
         clubService.update(club);
         return "redirect:/clubs";
