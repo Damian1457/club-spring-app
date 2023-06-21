@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Table(name = "CLUBS")
 public class ClubEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String title;
     private String photoUrl;
