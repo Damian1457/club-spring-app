@@ -31,6 +31,13 @@ public class ClubController {
         return "clubs-list";
     }
 
+    @GetMapping("/{id}")
+    public String readView(@PathVariable("id") Long id, Model model) {
+        Club club = clubService.findById(id);
+        model.addAttribute("club", club);
+        return "clubs-detail";
+    }
+
     @GetMapping("/new")
     public String createView(Model model) {
         ClubEntity club = new ClubEntity();
