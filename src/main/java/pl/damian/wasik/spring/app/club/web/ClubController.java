@@ -4,11 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.damian.wasik.spring.app.club.repository.entity.ClubEntity;
 import pl.damian.wasik.spring.app.club.service.ClubService;
 import pl.damian.wasik.spring.app.club.web.model.Club;
@@ -80,5 +76,12 @@ public class ClubController {
     public String deleteView(@PathVariable("id") Long id) {
         clubService.delete(id);
         return "redirect:/clubs";
+    }
+
+    @GetMapping("/search")
+    public String readClubs(@RequestParam(value = "query") String query, Model model) {
+        List<Club> clubs = clubService.readClubs(query);
+        model.addAttribute("clubs", clubs);
+        return "clubs-list";
     }
 }
