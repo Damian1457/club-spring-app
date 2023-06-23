@@ -49,4 +49,10 @@ public class ClubServiceImpl implements ClubService {
     public void delete(Long id) {
         clubRepository.deleteById(id);
     }
+
+    @Override
+    public List<Club> readClubs(String query) {
+        List<ClubEntity> clubs = clubRepository.readClubs(query);
+        return clubs.stream().map(clubMapper::mapToClub).collect(Collectors.toList());
+    }
 }

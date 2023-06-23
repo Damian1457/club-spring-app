@@ -15,4 +15,6 @@ public interface ClubService {
     void update(Club club);
 
     void delete(Long id);
+
+    List<Club> readClubs(String query);
 }
