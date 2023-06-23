@@ -10,7 +10,9 @@ public interface ClubService {
 
     ClubEntity create(Club club);
 
-    Club findById(Long id);
+    Club read(Long id);
 
     void update(Club club);
+
+    void delete(Long id);
 }

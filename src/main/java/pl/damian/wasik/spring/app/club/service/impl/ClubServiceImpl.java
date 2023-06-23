@@ -34,7 +34,7 @@ public class ClubServiceImpl implements ClubService {
     }
 
     @Override
-    public Club findById(Long id) {
+    public Club read(Long id) {
         ClubEntity clubEntity = clubRepository.findById(id).get();
         return clubMapper.mapToClub(clubEntity);
     }
@@ -43,5 +43,10 @@ public class ClubServiceImpl implements ClubService {
     public void update(Club club) {
         ClubEntity clubEntity = clubMapper.mapToClubEntity(club);
         clubRepository.save(clubEntity);
+    }
+
+    @Override
+    public void delete(Long id) {
+        clubRepository.deleteById(id);
     }
 }

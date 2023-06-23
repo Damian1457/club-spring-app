@@ -33,7 +33,7 @@ public class ClubController {
 
     @GetMapping("/{id}")
     public String readView(@PathVariable("id") Long id, Model model) {
-        Club club = clubService.findById(id);
+        Club club = clubService.read(id);
         model.addAttribute("club", club);
         return "clubs-detail";
     }
@@ -59,7 +59,7 @@ public class ClubController {
 
     @GetMapping("/{id}/update")
     public String updateView(@PathVariable("id") Long id, Model model) {
-        Club club = clubService.findById(id);
+        Club club = clubService.read(id);
         model.addAttribute("club", club);
         return "clubs-edit";
     }
@@ -73,6 +73,12 @@ public class ClubController {
         }
         club.setId(id);
         clubService.update(club);
+        return "redirect:/clubs";
+    }
+
+    @GetMapping("/{id}/delete")
+    public String deleteView(@PathVariable("id") Long id) {
+        clubService.delete(id);
         return "redirect:/clubs";
     }
 }
