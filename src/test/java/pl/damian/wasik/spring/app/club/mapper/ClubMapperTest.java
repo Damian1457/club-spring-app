@@ -2,12 +2,13 @@ package pl.damian.wasik.spring.app.club.mapper;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.damian.wasik.spring.app.club.repository.entity.ClubEntity;
 import pl.damian.wasik.spring.app.club.web.model.Club;
 
 import java.time.LocalDateTime;
+
+import static pl.damian.wasik.spring.app.club.mapper.ClubMapper.mapToClub;
 
 @SpringBootTest
 class ClubMapperTest {
@@ -17,9 +18,6 @@ class ClubMapperTest {
     public static final String IMPORTANT_CLUB = "Club is the most important club";
     public static final LocalDateTime CREATED_ON = LocalDateTime.now();
     public static final LocalDateTime UPDATED_ON = LocalDateTime.now();
-
-    @Autowired
-    private ClubMapper clubMapper;
 
     @Test
     void givenClubEntity_whenMapToClub_thenReturnClub() {
@@ -33,7 +31,7 @@ class ClubMapperTest {
                 .build();
 
         //When
-        Club mapClub = clubMapper.mapToClub(club);
+        Club mapClub = mapToClub(club);
 
         //Then
         Assertions.assertNotNull(mapClub, "The mapClub is null");

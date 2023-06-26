@@ -6,7 +6,7 @@ import pl.damian.wasik.spring.app.club.web.model.Club;
 
 @Component
 public class ClubMapper {
-    public Club mapToClub(ClubEntity clubEntity) {
+    public static Club mapToClub(ClubEntity clubEntity) {
         Club club = Club.builder()
                 .id(clubEntity.getId())
                 .title(clubEntity.getTitle())
@@ -18,7 +18,7 @@ public class ClubMapper {
         return club;
     }
 
-    public ClubEntity mapToClubEntity(Club club) {
+    public static ClubEntity mapToClubEntity(Club club) {
         ClubEntity clubEntity = ClubEntity.builder()
                 .id(club.getId())
                 .title(club.getTitle())

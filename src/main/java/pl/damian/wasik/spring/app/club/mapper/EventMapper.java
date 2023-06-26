@@ -6,7 +6,7 @@ import pl.damian.wasik.spring.app.club.web.model.Event;
 
 @Component
 public class EventMapper {
-    public EventEntity mapToEventEntity(Event event) {
+    public static EventEntity mapToEventEntity(Event event) {
         EventEntity eventEntity = EventEntity.builder()
                 .id(event.getId())
                 .name(event.getName())
