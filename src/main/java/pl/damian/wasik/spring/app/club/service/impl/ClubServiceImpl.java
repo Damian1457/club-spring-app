@@ -10,37 +10,38 @@ import pl.damian.wasik.spring.app.club.web.model.Club;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static pl.damian.wasik.spring.app.club.mapper.ClubMapper.mapToClub;
+import static pl.damian.wasik.spring.app.club.mapper.ClubMapper.mapToClubEntity;
+
 @Service
 public class ClubServiceImpl implements ClubService {
     private ClubRepository clubRepository;
-    private ClubMapper clubMapper;
 
-    public ClubServiceImpl(ClubRepository clubRepository, ClubMapper clubMapper) {
+    public ClubServiceImpl(ClubRepository clubRepository) {
         this.clubRepository = clubRepository;
-        this.clubMapper = clubMapper;
     }
 
     @Override
     public List<Club> findAllClubs() {
         List<ClubEntity> clubs = clubRepository.findAll();
-        return clubs.stream().map(clubMapper::mapToClub).collect(Collectors.toList());
+        return clubs.stream().map(club -> mapToClub(club)).collect(Collectors.toList());
     }
 
     @Override
     public ClubEntity create(Club club) {
-        ClubEntity clubEntity = clubMapper.mapToClubEntity(club);
+        ClubEntity clubEntity = mapToClubEntity(club);
         return clubRepository.save(clubEntity);
     }
 
     @Override
     public Club read(Long id) {
         ClubEntity clubEntity = clubRepository.findById(id).get();
-        return clubMapper.mapToClub(clubEntity);
+        return mapToClub(clubEntity);
     }
 
     @Override
     public void update(Club club) {
-        ClubEntity clubEntity = clubMapper.mapToClubEntity(club);
+        ClubEntity clubEntity = mapToClubEntity(club);
         clubRepository.save(clubEntity);
     }
 
@@ -52,6 +53,6 @@ public class ClubServiceImpl implements ClubService {
     @Override
     public List<Club> readClubs(String query) {
         List<ClubEntity> clubs = clubRepository.readClubs(query);
-        return clubs.stream().map(clubMapper::mapToClub).collect(Collectors.toList());
+        return clubs.stream().map(club -> mapToClub(club)).collect(Collectors.toList());
     }
 }
