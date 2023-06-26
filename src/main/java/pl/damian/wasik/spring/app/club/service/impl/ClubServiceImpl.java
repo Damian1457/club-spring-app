@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class ClubServiceImpl implements ClubService {
-
     private ClubRepository clubRepository;
     private ClubMapper clubMapper;
 
