@@ -31,6 +31,12 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    public Event findByEventId(Long id) {
+        EventEntity eventEntity = eventRepository.findById(id).get();
+        return mapToEvent(eventEntity);
+    }
+
+    @Override
     public void create(Long id, Event event) {
         ClubEntity clubEntity = clubRepository.findById(id).get();
         EventEntity eventEntity = mapToEventEntity(event);
