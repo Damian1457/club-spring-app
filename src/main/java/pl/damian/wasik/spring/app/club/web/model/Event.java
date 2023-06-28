@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import pl.damian.wasik.spring.app.club.repository.entity.ClubEntity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -25,4 +26,5 @@ public class Event {
     private String photoUrl;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
+    private ClubEntity clubEntity;
 }
