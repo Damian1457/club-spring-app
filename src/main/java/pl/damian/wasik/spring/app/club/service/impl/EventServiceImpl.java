@@ -37,6 +37,12 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    public void update(Event event) {
+        EventEntity eventEntity = mapToEventEntity(event);
+        eventRepository.save(eventEntity);
+    }
+
+    @Override
     public void create(Long id, Event event) {
         ClubEntity clubEntity = clubRepository.findById(id).get();
         EventEntity eventEntity = mapToEventEntity(event);

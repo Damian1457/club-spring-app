@@ -1,12 +1,15 @@
 package pl.damian.wasik.spring.app.club.web;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.damian.wasik.spring.app.club.repository.entity.EventEntity;
 import pl.damian.wasik.spring.app.club.service.EventService;
 import pl.damian.wasik.spring.app.club.web.model.Event;
 
+import java.text.AttributedString;
 import java.util.List;
 
 @Controller
@@ -26,7 +29,7 @@ public class EventController {
     }
 
     @GetMapping("/{id}")
-    public String readView(@PathVariable("id")Long id, Model model) {
+    public String readView(@PathVariable("id") Long id, Model model) {
         Event event = eventService.findByEventId(id);
         model.addAttribute("event", event);
         return "events-detail";
@@ -41,8 +44,35 @@ public class EventController {
     }
 
     @PostMapping("/{id}")
-    public String create(@PathVariable("id") Long id, @ModelAttribute("event") Event event, Model model) {
+    public String create(@PathVariable("id") Long id, @Valid @ModelAttribute("event") Event event,
+                         BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("event", event);
+            return "clubs-create";
+        }
         eventService.create(id, event);
         return "redirect:/clubs/" + id;
+    }
+
+    @GetMapping("/{id}/update")
+    public String updateView(@PathVariable("id") Long id, Model model) {
+        Event event = eventService.findByEventId(id);
+        model.addAttribute("event", event);
+        return "events-edit";
+    }
+
+    @PostMapping("{id}/update")
+    public String update(@PathVariable("id") Long id,
+                         @Valid @ModelAttribute("event") Event event,
+                         BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("event", event);
+            return "events-edit";
+        }
+        Event eventNew = eventService.findByEventId(id);
+        event.setId(id);
+        event.setClubEntity(eventNew.getClubEntity());
+        eventService.update(event);
+        return "redirect:/events";
     }
 }
