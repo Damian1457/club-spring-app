@@ -45,6 +45,7 @@
                                 <h2 th:text="${event.name}" class="card-title h4"></h2>
                                 <p class="card-text" th:text="${club.content}"></p>
                                 <a class="btn btn-primary">Delete</a>
+                                <a class="btn btn-primary" th:href="@{/events/{id}(id=${event.id})}">More</a>
                             </div>
                         </div>
                     </div>

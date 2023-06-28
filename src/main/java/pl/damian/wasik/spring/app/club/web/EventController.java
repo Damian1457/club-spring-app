@@ -25,6 +25,13 @@ public class EventController {
         return "events-list";
     }
 
+    @GetMapping("/{id}")
+    public String readView(@PathVariable("id")Long id, Model model) {
+        Event event = eventService.findByEventId(id);
+        model.addAttribute("event", event);
+        return "events-detail";
+    }
+
     @GetMapping("/{id}/new")
     public String createView(@PathVariable("id") Long id, Model model) {
         EventEntity eventEntity = new EventEntity();
