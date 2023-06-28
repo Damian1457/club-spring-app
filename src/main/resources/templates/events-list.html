@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>Club List</title>
+    <title>Event List</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
     <!-- Bootstrap icons-->
@@ -58,23 +58,19 @@
     <section layout:fragment="body" class="py-5">
         <div class="container px-5 my-5">
             <div class="text-center mb-5">
-                <h1 class="fw-bolder">Find Running Clubs</h1>
-                <p class="lead fw-normal text-muted mb-0">Groups of passionate near you</p>
+                <h1 class="fw-bolder">Find Running Events</h1>
+                <p class="lead fw-normal text-muted mb-0">Find running events near you</p>
             </div>
             <div class="row gx-5">
-                <div>
-                    <form th:action="@{/clubs/search}" class="form-inline my-2 my-lg-0 mb-3">
-                        <input name="query" class="form-control mr-sn-2 mb-5" type="search" placeholder="Search running clubs" aria-label="Search">
-                    </form>
-                </div>
-                <div th:each="club :${clubs}" class="col-lg-6 mb-2">
+
+                <div th:each="event :${events}" class="col-lg-6 mb-2">
                     <div class="position-relative mb-3">
-                        <img class="img-fluid rounded-3 mb-3" th:src="${club.photoUrl}" alt="..."/>
-                        <a th:text="${club.title}" class="h3 fw-bolder text-decoration-none link-dark stretched-link"
-                           href="#!">Project name</a>
+                        <img class="img-fluid rounded-3 mb-3" th:src="${event.photoUrl}" alt="..."/>
+                        <a th:text="${event.name}" class="h3 fw-bolder text-decoration-none link-dark stretched-link"
+                           href="#!"></a>
                     </div>
-                    <a class="btn btn-primary" th:href="@{/clubs/{id}(id=${club.id})}">View</a>
-                    <a class="btn btn-primary" th:href="@{/clubs/{id}/update(id=${club.id})}">Edit</a>
+                    <a class="btn btn-primary">View</a>
+                    <a class="btn btn-primary">Edit</a>
                 </div>
             </div>
         </div>

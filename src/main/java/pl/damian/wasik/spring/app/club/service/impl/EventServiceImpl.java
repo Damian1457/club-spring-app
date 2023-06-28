@@ -8,6 +8,10 @@ import pl.damian.wasik.spring.app.club.repository.entity.EventEntity;
 import pl.damian.wasik.spring.app.club.service.EventService;
 import pl.damian.wasik.spring.app.club.web.model.Event;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static pl.damian.wasik.spring.app.club.mapper.EventMapper.mapToEvent;
 import static pl.damian.wasik.spring.app.club.mapper.EventMapper.mapToEventEntity;
 
 @Service
@@ -18,6 +22,12 @@ public class EventServiceImpl implements EventService {
     public EventServiceImpl(EventRepository eventRepository, ClubRepository clubRepository) {
         this.eventRepository = eventRepository;
         this.clubRepository = clubRepository;
+    }
+
+    @Override
+    public List<Event> findAllEvents() {
+        List<EventEntity> events = eventRepository.findAll();
+        return events.stream().map(eventEntity -> mapToEvent(eventEntity)).collect(Collectors.toList());
     }
 
     @Override
