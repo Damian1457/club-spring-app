@@ -4,6 +4,10 @@ import org.springframework.stereotype.Component;
 import pl.damian.wasik.spring.app.club.repository.entity.ClubEntity;
 import pl.damian.wasik.spring.app.club.web.model.Club;
 
+import java.util.stream.Collectors;
+
+import static pl.damian.wasik.spring.app.club.mapper.EventMapper.mapToEvent;
+
 @Component
 public class ClubMapper {
     public static Club mapToClub(ClubEntity clubEntity) {
@@ -14,6 +18,7 @@ public class ClubMapper {
                 .content(clubEntity.getContent())
                 .createdOn(clubEntity.getCreatedOn())
                 .updatedOn(clubEntity.getUpdatedOn())
+                .events(clubEntity.getEvents().stream().map((eventEntity) -> mapToEvent(eventEntity)).collect(Collectors.toList()))
                 .build();
         return club;
     }

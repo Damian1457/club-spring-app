@@ -7,6 +7,8 @@ import pl.damian.wasik.spring.app.club.repository.entity.EventEntity;
 import pl.damian.wasik.spring.app.club.service.EventService;
 import pl.damian.wasik.spring.app.club.web.model.Event;
 
+import java.util.List;
+
 @Controller
 @RequestMapping(value = "/events") // http://localhost:8080/events
 public class EventController {
@@ -14,6 +16,13 @@ public class EventController {
 
     public EventController(EventService eventService) {
         this.eventService = eventService;
+    }
+
+    @GetMapping
+    public String findAllEvents(Model model) {
+        List<Event> events = eventService.findAllEvents();
+        model.addAttribute("events", events);
+        return "events-list";
     }
 
     @GetMapping("/{id}/new")

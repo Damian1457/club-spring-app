@@ -19,4 +19,18 @@ public class EventMapper {
                 .build();
         return eventEntity;
     }
+
+    public static Event mapToEvent(EventEntity eventEntity) {
+        Event event = Event.builder()
+                .id(eventEntity.getId())
+                .name(eventEntity.getName())
+                .startTime(eventEntity.getStartTime())
+                .endTime(eventEntity.getEndTime())
+                .type(eventEntity.getType())
+                .photoUrl(eventEntity.getPhotoUrl())
+                .createdOn(eventEntity.getCreatedOn())
+                .updatedOn(eventEntity.getUpdatedOn())
+                .build();
+        return event;
+    }
 }
