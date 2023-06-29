@@ -12,4 +12,6 @@ public interface EventService {
     Event findByEventId(Long id);
 
     void update(Event event);
+
+    void delete(Long id);
 }

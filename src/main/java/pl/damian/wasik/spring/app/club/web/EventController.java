@@ -9,7 +9,6 @@ import pl.damian.wasik.spring.app.club.repository.entity.EventEntity;
 import pl.damian.wasik.spring.app.club.service.EventService;
 import pl.damian.wasik.spring.app.club.web.model.Event;
 
-import java.text.AttributedString;
 import java.util.List;
 
 @Controller
@@ -73,6 +72,12 @@ public class EventController {
         event.setId(id);
         event.setClubEntity(eventNew.getClubEntity());
         eventService.update(event);
+        return "redirect:/events";
+    }
+
+    @GetMapping("/{id}/delete")
+    public String deleteView(@PathVariable("id") Long id) {
+        eventService.delete(id);
         return "redirect:/events";
     }
 }

@@ -49,4 +49,9 @@ public class EventServiceImpl implements EventService {
         eventEntity.setClubEntity(clubEntity);
         eventRepository.save(eventEntity);
     }
+
+    @Override
+    public void delete(Long id) {
+        eventRepository.deleteById(id);
+    }
 }
