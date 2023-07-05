@@ -21,8 +21,13 @@ public class AuthController {
         this.userService = userService;
     }
 
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";
+    }
+
     @GetMapping
-    public String createView(Model model) {
+    public String createRegisterView(Model model) {
         Registration user = new Registration();
         model.addAttribute("user", user);
         return "register";
@@ -33,12 +38,12 @@ public class AuthController {
                            BindingResult bindingResult, Model model) {
         UserEntity existingUserEmail = userService.findByEmail(user.getEmail());
         if (existingUserEmail != null && existingUserEmail.getEmail() != null && !existingUserEmail.getEmail().isEmpty()) {
-            bindingResult.rejectValue("email", "There is already a user with this email/username.");
+            return "redirect:/register?fail";
         }
 
         UserEntity existingUserUsername = userService.findBtUsername(user.getUsername());
         if (existingUserUsername != null && existingUserUsername.getUsername() != null && !existingUserUsername.getUsername().isEmpty()) {
-            bindingResult.rejectValue("username", "There is already a user with this email/username.");
+            return "redirect:/register?fail";
         }
 
         if (bindingResult.hasErrors()) {

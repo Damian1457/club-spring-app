@@ -12,7 +12,8 @@ import pl.damian.wasik.spring.app.club.web.model.Event;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/events") // http://localhost:8080/events
+@RequestMapping(value = "/events") //
+
 public class EventController {
     private EventService eventService;
 
