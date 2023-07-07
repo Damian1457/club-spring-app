@@ -13,7 +13,6 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/events") //
-
 public class EventController {
     private EventService eventService;
 

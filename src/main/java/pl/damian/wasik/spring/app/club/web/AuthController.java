@@ -7,13 +7,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import pl.damian.wasik.spring.app.club.repository.entity.UserEntity;
 import pl.damian.wasik.spring.app.club.service.UserService;
 import pl.damian.wasik.spring.app.club.web.model.Registration;
 
 @Controller
-@RequestMapping(value = "/register")
 public class AuthController {
     private UserService userService;
 
@@ -21,12 +19,12 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @GetMapping("/login")
+    @GetMapping("/loging")
     public String loginPage() {
         return "login";
     }
 
-    @GetMapping
+    @GetMapping("/register")
     public String createRegisterView(Model model) {
         Registration user = new Registration();
         model.addAttribute("user", user);
