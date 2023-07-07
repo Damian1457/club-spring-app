@@ -44,7 +44,7 @@
                 You hava been logged out.
             </div>
             <div class="login-form">
-                <form method="post" role="form" th:action="@{/login}">
+                <form method="post" role="form" th:action="@{/loging}">
                     <div class="form-group">
                         <label>Username</label>
                         <input
@@ -68,7 +68,7 @@
                     </div>
 
                     <button th:href="@{/register}" type="submit" class="btn btn-black">Don't have an account already? Register Here.</button>
-                    <button th:href="@{/login}" value="Log in" type="submit" class="btn btn-secondary">Login</button>
+                    <button value="Log in" type="submit" class="btn btn-secondary">Login</button>
                 </form>
             </div>
         </div>
